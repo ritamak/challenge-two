@@ -8,11 +8,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.5.6",
+    "@chakra-ui/icons": "^1.1.1",
+    "@chakra-ui/react": "^1.7.2",
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@fontsource/merriweather": "^4.5.2",
+    "@lingui/react": "^3.13.0",
+    "framer-motion": "^4.1.17",
+    "graphql": "^16.1.0",
+    "make-plural": "^7.0.0",
     "next": "12.0.7",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "styled-components": "^5.3.3",
+    "translate": "^1.4.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@lingui/cli": "^3.13.0",
+    "@lingui/macro": "^3.13.0",
+    "babel-plugin-macros": "^3.1.0",
     "eslint": "8.4.1",
     "eslint-config-next": "12.0.7"
   }
