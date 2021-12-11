@@ -6,6 +6,9 @@
   width: 100%;
   border-radius: 5px;
   background: rgb(232, 235, 242);
+}
+
+.answer {
   color: rgb(22, 22, 22);
   font-weight: bold !important;
 }
@@ -17,7 +20,6 @@
   align-items: center;
   text-align: justify;
   flex-wrap: wrap;
-  color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   box-sizing: border-box !important;
   width: 100%;
@@ -48,11 +50,15 @@
   border-radius: 10px !important;
 }
 
-.url {
-  background: none !important;
-  color: black !important;
-}
-
 .linkBox {
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .linkBox {
+    display: flex;
+    flex-direction: column !important;
+  }
 }

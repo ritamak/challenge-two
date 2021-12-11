@@ -38,14 +38,16 @@ const Answer = ({ search, resetSearchHandler, answerData }) => {
         )}
 
         <Box className={classes.text}>
-          <Text>{router.locale === "en" ? answerData.answer : translated}</Text>
+          <Text className={classes.answer}>
+            {router.locale === "en" ? answerData.answer : translated}
+          </Text>
           {answerData.url && (
             <Box className={classes.linkBox}>
               <Text fontSize="s" className={classes.more}>
                 <b>{router.locale === "en" ? "More: " : "Mehr: "}</b>
               </Text>
-              <Link href={answerData.url} className={classes.url}>
-                {answerData.url}
+              <Link passHref href={answerData.url}>
+                <Text color="rgb(77, 102, 147)">{answerData.url}</Text>
               </Link>
             </Box>
           )}
