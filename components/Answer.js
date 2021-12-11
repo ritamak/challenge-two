@@ -27,6 +27,7 @@ const Answer = ({ search, resetSearchHandler, answerData }) => {
       <Box p={5} className={classes.box}>
         {search && (
           <Tag
+            className={classes.tag}
             borderRadius="full"
             size="lg"
             onClick={resetSearchHandler}
@@ -37,20 +38,18 @@ const Answer = ({ search, resetSearchHandler, answerData }) => {
         )}
 
         <Box className={classes.text}>
-          <Text color="white">
-            {router.locale === "en" ? answerData.answer : translated}
-          </Text>
-          {answerData.url && (
-            <Box className={classes.link}>
-              <Text fontSize="s" className={classes.more}>
-                <b>{router.locale === "en" ? "More: " : "Mehr: "}</b>
-              </Text>
-              <Text fontSize="s" color="black">
-                <Link href={answerData.url}>{answerData.url}</Link>
-              </Text>
-            </Box>
-          )}
+          <Text>{router.locale === "en" ? answerData.answer : translated}</Text>
         </Box>
+        {answerData.url && (
+          <Box className={classes.link}>
+            <Text fontSize="s" className={classes.more}>
+              <b>{router.locale === "en" ? "More: " : "Mehr: "}</b>
+            </Text>
+            <Text fontSize="s" color="rgb(77, 102, 147)">
+              <Link href={answerData.url}>{answerData.url}</Link>
+            </Text>
+          </Box>
+        )}
       </Box>
     </Stack>
   );
