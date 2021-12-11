@@ -39,17 +39,17 @@ const Answer = ({ search, resetSearchHandler, answerData }) => {
 
         <Box className={classes.text}>
           <Text>{router.locale === "en" ? answerData.answer : translated}</Text>
+          {answerData.url && (
+            <Box className={classes.linkBox}>
+              <Text fontSize="s" className={classes.more}>
+                <b>{router.locale === "en" ? "More: " : "Mehr: "}</b>
+              </Text>
+              <Link href={answerData.url} className={classes.url}>
+                {answerData.url}
+              </Link>
+            </Box>
+          )}
         </Box>
-        {answerData.url && (
-          <Box className={classes.link}>
-            <Text fontSize="s" className={classes.more}>
-              <b>{router.locale === "en" ? "More: " : "Mehr: "}</b>
-            </Text>
-            <Text fontSize="s" color="rgb(77, 102, 147)">
-              <Link href={answerData.url}>{answerData.url}</Link>
-            </Text>
-          </Box>
-        )}
       </Box>
     </Stack>
   );

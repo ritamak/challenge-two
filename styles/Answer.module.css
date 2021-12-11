@@ -4,8 +4,7 @@
   padding-top: 20px;
   padding-bottom: 20px;
   width: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
   background: rgb(232, 235, 242);
   color: rgb(22, 22, 22);
   font-weight: bold !important;
@@ -17,6 +16,7 @@
   justify-content: center;
   align-items: center;
   text-align: justify;
+  flex-wrap: wrap;
   color: white;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   box-sizing: border-box !important;
@@ -30,21 +30,6 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-
-.link {
-  margin-top: 0px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  background: rgb(232, 235, 242);
-  width: 100%;
-  border-end-end-radius: 5px;
-  border-end-start-radius: 5px;
 }
 
 .more {
@@ -61,4 +46,13 @@
   background-color: rgb(240, 248, 247) !important;
   border: 2px solid rgb(39, 134, 132);
   border-radius: 10px !important;
+}
+
+.url {
+  background: none !important;
+  color: black !important;
+}
+
+.linkBox {
+  margin-top: 20px;
 }
