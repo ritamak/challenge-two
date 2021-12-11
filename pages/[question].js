@@ -77,8 +77,9 @@ const Question = ({ data }) => {
           <Link href="/" passHref>
             <Button
               rightIcon={<ArrowForwardIcon />}
-              colorScheme="white"
-              variant="outline"
+              colorScheme="teal"
+              bg="teal"
+              color="white"
             >
               {router.locale === "de" ? deutsch : english}
             </Button>

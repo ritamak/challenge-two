@@ -37,12 +37,18 @@ const Answer = ({ search, resetSearchHandler, answerData }) => {
         )}
 
         <Box className={classes.text}>
-          <Text>{router.locale === "en" ? answerData.answer : translated}</Text>
+          <Text color="white">
+            {router.locale === "en" ? answerData.answer : translated}
+          </Text>
           {answerData.url && (
-            <Text fontSize="s" color="black">
-              <b>{router.locale === "en" ? "More: " : "Mehr: "}</b>
-              <Link href={answerData.url}>{answerData.url}</Link>
-            </Text>
+            <Box className={classes.link}>
+              <Text fontSize="s" className={classes.more}>
+                <b>{router.locale === "en" ? "More: " : "Mehr: "}</b>
+              </Text>
+              <Text fontSize="s" color="black">
+                <Link href={answerData.url}>{answerData.url}</Link>
+              </Text>
+            </Box>
           )}
         </Box>
       </Box>
