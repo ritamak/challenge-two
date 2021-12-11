@@ -21,6 +21,7 @@ const deutsch = {
 
 const Form = ({ setSearch, search, setAnswerData }) => {
   const router = useRouter();
+
   const searchHandler = async (event) => {
     event.preventDefault();
 

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import Head from "next/head";
-import { Box } from "@chakra-ui/react";
 import Header from "../components/Header";
 import Questions from "../components/Questions";
 import { useRouter } from "next/router";
@@ -19,7 +18,7 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <>
       <Head>
         <title>RitaMak-Challenge</title>
         <meta name="description" content="coding challenge" />
@@ -34,9 +33,11 @@ export default function Home() {
         resetSearchHandler={resetSearchHandler}
       />
       <footer></footer>
-    </div>
+    </>
   );
 }
+
+/*
 
 export const getServerSideProps = async (context) => {
   let myHeaders = new Headers();
@@ -75,3 +76,5 @@ export const getServerSideProps = async (context) => {
     },
   };
 };
+
+*/

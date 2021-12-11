@@ -1,8 +1,9 @@
+import Link from "next/link";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import Answer from "../components/Answer";
 import Header from "../components/Header";
-import Link from "next/link";
 import { Box, Stack, Button } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 export const getServerSideProps = async (context) => {
@@ -49,34 +50,42 @@ const deutsch = "Mehr fragen";
 const Question = ({ data }) => {
   const router = useRouter();
   return (
-    <Box
-      spacing={8}
-      flexDirection="column"
-      align="center"
-      justify="center"
-      alignSelf="center"
-    >
-      <Header />
-      <Stack
+    <>
+      <Head>
+        <title>RitaMak-Challenge</title>
+        <meta name="description" content="coding challenge" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Box
         spacing={8}
         flexDirection="column"
         align="center"
         justify="center"
         alignSelf="center"
-        mt={20}
       >
-        <Answer answerData={data} />
-        <Link href="/" passHref>
-          <Button
-            rightIcon={<ArrowForwardIcon />}
-            colorScheme="white"
-            variant="outline"
-          >
-            {router.locale === "de" ? deutsch : english}
-          </Button>
-        </Link>
-      </Stack>
-    </Box>
+        <Header />
+        <Stack
+          spacing={8}
+          flexDirection="column"
+          align="center"
+          justify="center"
+          alignSelf="center"
+          mt={20}
+          width="80%"
+        >
+          <Answer answerData={data} />
+          <Link href="/" passHref>
+            <Button
+              rightIcon={<ArrowForwardIcon />}
+              colorScheme="white"
+              variant="outline"
+            >
+              {router.locale === "de" ? deutsch : english}
+            </Button>
+          </Link>
+        </Stack>
+      </Box>
+    </>
   );
 };
 

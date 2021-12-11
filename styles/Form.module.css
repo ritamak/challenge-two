@@ -2,12 +2,12 @@
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   gap: 20px;
-  max-width: 80ch !important;
+  max-width: 100% !important;
 }
 
 .form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -24,6 +24,11 @@
 .formLabel {
   width: 100%;
   text-align: center !important;
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em !important;
 }
 
 .input {
