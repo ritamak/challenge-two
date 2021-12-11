@@ -4,7 +4,9 @@ import {
   FormLabel,
   FormControl,
   IconButton,
+  Divider,
 } from "@chakra-ui/react";
+
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import classes from "../styles/Form.module.css";
 import { useRouter } from "next/router";
@@ -64,7 +66,6 @@ const Form = ({ setSearch, search, setAnswerData }) => {
         <FormLabel className={classes.formLabel}>
           <b>{router.locale === "de" ? deutsch.phrase : english.phrase}</b>
         </FormLabel>
-
         <FormControl className={classes.formControl}>
           <Input
             size="lg"
@@ -81,8 +82,7 @@ const Form = ({ setSearch, search, setAnswerData }) => {
             type="submit"
             disabled={search === ""}
             icon={<ArrowForwardIcon />}
-            colorScheme="gray"
-            variant="outline"
+            colorScheme="teal"
             aria-label="Search Database"
           />
         </FormControl>
