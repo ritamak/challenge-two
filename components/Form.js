@@ -44,21 +44,19 @@ const Form = ({ setSearch, search, setAnswerData }) => {
 
   const searchHandler = async (event) => {
     event.preventDefault();
-
     const query = gql`
-      query {
-        answer(input: { query: ${search} }) @rest(method: "POST", path: "") {
-          answer
-          url
-        }
+    query {
+      answer(input: { query:"${search}" }) @rest(method: "POST", path: "") {
+        answer
+        url
       }
-    `;
+    }
+  `;
+
     client
       .query({ query })
       .then((response) => {
-        let responseData = response.data.answer;
-        console.log(responseData);
-        setAnswerData(responseData);
+        setAnswerData(response.data.answer);
       })
       .catch((error) => console.error(error));
   };
@@ -80,6 +78,7 @@ const Form = ({ setSearch, search, setAnswerData }) => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className={classes.input}
+            name="question"
           />
           <IconButton
             type="submit"
@@ -95,36 +94,3 @@ const Form = ({ setSearch, search, setAnswerData }) => {
 };
 
 export default Form;
-
-/*  let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer NmE1OTc3MzAtZjkwYy00ODE2LThmMjctN2Q3MzAzOGU3MGQ4"
-    );
-
-    let raw = JSON.stringify({
-      query: search,
-    });
-
-    let requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    const res = await fetch(
-      "https://api.m3o.com/v1/answer/Question",
-      requestOptions
-    );
-    const data = await res.json();
-
-    if (!data) {
-      return {
-        notFound: true,
-      };
-    } else {
-      setAnswerData(data);
-    }
-*/

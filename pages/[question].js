@@ -6,7 +6,7 @@ import Header from "../components/Header";
 import { Box, Stack, Button } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { gql } from "@apollo/client";
-import { ApolloClient, InMemoryCache, useQuery } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
 
 export const getServerSideProps = async (context) => {
@@ -29,7 +29,7 @@ export const getServerSideProps = async (context) => {
 
   const query = gql`
   query {
-   answer(input: { query: ${context.query.question}})
+   answer(input: { query: "${context.query.question}"})
      @rest(method: "POST", path: "") {
      answer
      url
