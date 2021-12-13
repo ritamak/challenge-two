@@ -23,6 +23,7 @@ const Questions = ({
           search={search}
           resetSearchHandler={resetSearchHandler}
           answerData={answerData}
+          tagText={search}
         />
       )}
     </Stack>

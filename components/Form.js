@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { gql } from "@apollo/client";
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { RestLink } from "apollo-link-rest";
+import { callApi } from "../graphql/CallApi";
 
 const english = {
   phrase: "Type any word to get an answer",
@@ -44,21 +45,12 @@ const Form = ({ setSearch, search, setAnswerData }) => {
 
   const searchHandler = async (event) => {
     event.preventDefault();
-    const query = gql`
-    query {
-      answer(input: { query:"${search}" }) @rest(method: "POST", path: "") {
-        answer
-        url
-      }
+    const data = await callApi(search);
+    if (data) {
+      setAnswerData(data);
+    } else {
+      return <p>Answer not found..</p>;
     }
-  `;
-
-    client
-      .query({ query })
-      .then((response) => {
-        setAnswerData(response.data.answer);
-      })
-      .catch((error) => console.error(error));
   };
 
   return (

@@ -5,41 +5,11 @@ import Answer from "../components/Answer";
 import Header from "../components/Header";
 import { Box, Stack, Button } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { gql } from "@apollo/client";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { RestLink } from "apollo-link-rest";
+
+import { callApi } from "../graphql/CallApi";
 
 export const getServerSideProps = async (context) => {
-  let myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append(
-    "Authorization",
-    "Bearer NmE1OTc3MzAtZjkwYy00ODE2LThmMjctN2Q3MzAzOGU3MGQ4"
-  );
-
-  const restLink = new RestLink({
-    uri: "https://api.m3o.com/v1/answer/Question",
-    headers: myHeaders,
-  });
-
-  const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: restLink,
-  });
-
-  const query = gql`
-  query {
-   answer(input: { query: "${context.query.question}"})
-     @rest(method: "POST", path: "") {
-     answer
-     url
-   }
- }
-`;
-
-  const newData = await client.query({ query });
-  const gqlData = await newData.data.answer;
-
+  const gqlData = await callApi(context.query.question);
   if (!gqlData) {
     return {
       notFound: true,
@@ -82,7 +52,7 @@ const Question = ({ gqlData }) => {
           mt={20}
           width="80%"
         >
-          <Answer answerData={gqlData} />
+          <Answer answerData={gqlData} tagText={router.query.question} link />
           <Link href="/" passHref>
             <Button
               rightIcon={<ArrowForwardIcon />}

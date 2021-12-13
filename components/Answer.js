@@ -12,7 +12,7 @@ import translate from "translate";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const Answer = ({ search, resetSearchHandler, answerData }) => {
+const Answer = ({ tagText, resetSearchHandler, link, answerData }) => {
   const [translated, setTranslated] = useState("");
   const router = useRouter();
   translate.engine = "google";
@@ -20,12 +20,12 @@ const Answer = ({ search, resetSearchHandler, answerData }) => {
 
   translate(answerData.answer, "de")
     .then((result) => setTranslated(result))
-    .catch((err) => console.log(err));
+    .catch((err) => console.error(err));
 
   return (
     <Stack className={classes.wrapper}>
       <Box p={5} className={classes.box}>
-        {search && (
+        {!link && (
           <Tag
             className={classes.tag}
             borderRadius="full"
@@ -33,10 +33,14 @@ const Answer = ({ search, resetSearchHandler, answerData }) => {
             onClick={resetSearchHandler}
             mb={5}
           >
-            <TagLabel>{search}</TagLabel> <TagCloseButton />
+            <TagLabel>{tagText}</TagLabel> <TagCloseButton />
           </Tag>
         )}
-
+        {link && (
+          <Tag className={classes.tag} borderRadius="full" size="lg" mb={5}>
+            <TagLabel>{tagText}</TagLabel>
+          </Tag>
+        )}
         <Box className={classes.text}>
           <Text className={classes.answer}>
             {router.locale === "en" ? answerData.answer : translated}
