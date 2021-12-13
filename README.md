@@ -1,4 +1,4 @@
-# Rita Mak's Codding Challenge
+# Rita Mak's Coding Challenge
 
 This is a code challenge for Company X.
 
