@@ -1,6 +1,6 @@
 # Rita Mak's Coding Challenge
 
-This is a code challenge for Company X.
+This is a code challenge for Company X using Next.js, GraphQL, Apollo Client and React. For styling it was used Chakra UI and CSS modules.
 
 ## Installation
 
