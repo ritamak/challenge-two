@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import Header from "../components/Header";
 import Questions from "../components/Questions";
-import { useRouter } from "next/router";
 
 export default function Home() {
   const initialState = {};

@@ -8,9 +8,6 @@ import {
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import classes from "../styles/Form.module.css";
 import { useRouter } from "next/router";
-import { gql } from "@apollo/client";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
-import { RestLink } from "apollo-link-rest";
 import { callApi } from "../graphql/CallApi";
 
 const english = {
@@ -22,23 +19,6 @@ const deutsch = {
   phrase: "Geben sie ein beliebiges wort ein, um eine antwort zu erhalten",
   formPlaceHolder: "ihre frage...",
 };
-
-let myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append(
-  "Authorization",
-  "Bearer NmE1OTc3MzAtZjkwYy00ODE2LThmMjctN2Q3MzAzOGU3MGQ4"
-);
-
-const restLink = new RestLink({
-  uri: "https://api.m3o.com/v1/answer/Question",
-  headers: myHeaders,
-});
-
-const client = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: restLink,
-});
 
 const Form = ({ setSearch, search, setAnswerData }) => {
   const router = useRouter();

@@ -1,5 +1,4 @@
-import React from "react";
-import { Stack, Spacer } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import Form from "./Form";
 import Answer from "./Answer";
 import classes from "../styles/Questions.module.css";

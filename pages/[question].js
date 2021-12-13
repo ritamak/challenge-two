@@ -23,8 +23,7 @@ export const getServerSideProps = async (context) => {
   };
 };
 
-const english = "More questions";
-const deutsch = "Mehr fragen";
+const phrases = { english: "More questions", deutsch: "Mehr fragen" };
 
 const Question = ({ gqlData }) => {
   const router = useRouter();
@@ -51,6 +50,7 @@ const Question = ({ gqlData }) => {
           alignSelf="center"
           mt={20}
           width="80%"
+          mb={20}
         >
           <Answer answerData={gqlData} tagText={router.query.question} link />
           <Link href="/" passHref>
@@ -60,7 +60,7 @@ const Question = ({ gqlData }) => {
               bg="teal"
               color="white"
             >
-              {router.locale === "de" ? deutsch : english}
+              {router.locale === "de" ? phrases.deutsch : phrases.english}
             </Button>
           </Link>
         </Stack>

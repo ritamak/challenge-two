@@ -60,5 +60,10 @@
   .linkBox {
     display: flex;
     flex-direction: column !important;
+    font-size: 0.8em !important;
+  }
+  .answer {
+    font-size: 0.8em !important;
+    text-align: left;
   }
 }
