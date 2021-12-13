@@ -5,6 +5,9 @@ import Answer from "../components/Answer";
 import Header from "../components/Header";
 import { Box, Stack, Button } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache, useQuery } from "@apollo/client";
+import { RestLink } from "apollo-link-rest";
 
 export const getServerSideProps = async (context) => {
   let myHeaders = new Headers();
@@ -14,23 +17,30 @@ export const getServerSideProps = async (context) => {
     "Bearer NmE1OTc3MzAtZjkwYy00ODE2LThmMjctN2Q3MzAzOGU3MGQ4"
   );
 
-  let raw = JSON.stringify({
-    query: context.query.question,
+  const restLink = new RestLink({
+    uri: "https://api.m3o.com/v1/answer/Question",
+    headers: myHeaders,
   });
 
-  let requestOptions = {
-    method: "POST",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow",
-  };
+  const client = new ApolloClient({
+    cache: new InMemoryCache(),
+    link: restLink,
+  });
 
-  const res = await fetch(
-    "https://api.m3o.com/v1/answer/Question",
-    requestOptions
-  );
-  const data = await res.json();
-  if (!data) {
+  const query = gql`
+  query {
+   answer(input: { query: ${context.query.question}})
+     @rest(method: "POST", path: "") {
+     answer
+     url
+   }
+ }
+`;
+
+  const newData = await client.query({ query });
+  const gqlData = await newData.data.answer;
+
+  if (!gqlData) {
     return {
       notFound: true,
     };
@@ -38,16 +48,15 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      data,
+      gqlData,
     },
   };
 };
 
 const english = "More questions";
-
 const deutsch = "Mehr fragen";
 
-const Question = ({ data }) => {
+const Question = ({ gqlData }) => {
   const router = useRouter();
   return (
     <>
@@ -73,7 +82,7 @@ const Question = ({ data }) => {
           mt={20}
           width="80%"
         >
-          <Answer answerData={data} />
+          <Answer answerData={gqlData} />
           <Link href="/" passHref>
             <Button
               rightIcon={<ArrowForwardIcon />}

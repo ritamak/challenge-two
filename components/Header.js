@@ -1,4 +1,4 @@
-import React from "react";
+import Link from "next/link";
 import { Box, Text } from "@chakra-ui/react";
 import LocaleButton from "./LocaleButton";
 import classes from "../styles/Header.module.css";
@@ -12,7 +12,9 @@ const Header = () => {
       color="white"
       className={classes.container}
     >
-      <Text className={classes.text}>Rita Mak / Challenge</Text>
+      <Text className={classes.text}>
+        <Link href="/">Rita Mak / Challenge</Link>
+      </Text>
       <Box className={classes.buttons}>
         <LocaleButton lang={"en"} />
         <LocaleButton lang={"de"} />

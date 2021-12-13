@@ -32,7 +32,6 @@ export default function Home() {
         answerData={answerData}
         resetSearchHandler={resetSearchHandler}
       />
-      <footer></footer>
     </>
   );
 }

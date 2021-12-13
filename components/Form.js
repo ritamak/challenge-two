@@ -4,12 +4,13 @@ import {
   FormLabel,
   FormControl,
   IconButton,
-  Divider,
 } from "@chakra-ui/react";
-
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import classes from "../styles/Form.module.css";
 import { useRouter } from "next/router";
+import { gql } from "@apollo/client";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { RestLink } from "apollo-link-rest";
 
 const english = {
   phrase: "Type any word to get an answer",
@@ -21,43 +22,45 @@ const deutsch = {
   formPlaceHolder: "ihre frage...",
 };
 
+let myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append(
+  "Authorization",
+  "Bearer NmE1OTc3MzAtZjkwYy00ODE2LThmMjctN2Q3MzAzOGU3MGQ4"
+);
+
+const restLink = new RestLink({
+  uri: "https://api.m3o.com/v1/answer/Question",
+  headers: myHeaders,
+});
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: restLink,
+});
+
 const Form = ({ setSearch, search, setAnswerData }) => {
   const router = useRouter();
 
   const searchHandler = async (event) => {
     event.preventDefault();
 
-    let myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer NmE1OTc3MzAtZjkwYy00ODE2LThmMjctN2Q3MzAzOGU3MGQ4"
-    );
-
-    let raw = JSON.stringify({
-      query: search,
-    });
-
-    let requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    const res = await fetch(
-      "https://api.m3o.com/v1/answer/Question",
-      requestOptions
-    );
-    const data = await res.json();
-
-    if (!data) {
-      return {
-        notFound: true,
-      };
-    } else {
-      setAnswerData(data);
-    }
+    const query = gql`
+      query {
+        answer(input: { query: ${search} }) @rest(method: "POST", path: "") {
+          answer
+          url
+        }
+      }
+    `;
+    client
+      .query({ query })
+      .then((response) => {
+        let responseData = response.data.answer;
+        console.log(responseData);
+        setAnswerData(responseData);
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -92,3 +95,36 @@ const Form = ({ setSearch, search, setAnswerData }) => {
 };
 
 export default Form;
+
+/*  let myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Authorization",
+      "Bearer NmE1OTc3MzAtZjkwYy00ODE2LThmMjctN2Q3MzAzOGU3MGQ4"
+    );
+
+    let raw = JSON.stringify({
+      query: search,
+    });
+
+    let requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    const res = await fetch(
+      "https://api.m3o.com/v1/answer/Question",
+      requestOptions
+    );
+    const data = await res.json();
+
+    if (!data) {
+      return {
+        notFound: true,
+      };
+    } else {
+      setAnswerData(data);
+    }
+*/
